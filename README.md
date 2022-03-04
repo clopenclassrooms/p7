@@ -25,6 +25,7 @@ You can manually add the token :
 ![](https://github.com/clopenclassrooms/p7/blob/main/Documentation/img/bearer2.png)
 
 You can automatically config the host for all test :
+
 ![](https://github.com/clopenclassrooms/p7/blob/main/Documentation/img/config_host.png)
 
 
