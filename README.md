@@ -28,7 +28,6 @@ You can automatically config the host for all test :
 
 ![](https://github.com/clopenclassrooms/p7/blob/main/Documentation/img/config_host.png)
 
-
 ## Other
 If you want renew JWT SSL keys :
 ```Bash
