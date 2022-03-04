@@ -1,3 +1,5 @@
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9846aeebc05b4d5d96d837af975836c2)](https://www.codacy.com/gh/clopenclassrooms/p7/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=clopenclassrooms/p7&amp;utm_campaign=Badge_Grade)
+
 # Bilemo REST API
 
 ## Installation
