@@ -1,0 +1,27 @@
+@startuml
+    actor RESTclient
+    entity "api-platforme"
+    entity customerDataPersister
+    database BDD
+    
+    RESTclient -> "api-platforme" : HTTP => POST <host>\api\customers\ \nHEADER => Bearer <token>\nBODY => <new customer informations in json>
+    activate "api-platforme"
+    activate RESTclient
+    "api-platforme" -> "api-platforme" : Check token
+    
+    alt token is valid
+        "api-platforme" -> customerDataPersister : customer informations
+        activate customerDataPersister
+        customerDataPersister -> BDD : Insert new customer in user company
+        activate BDD
+        BDD -> customerDataPersister : customer
+        deactivate BDD
+        customerDataPersister -> "api-platforme" : customer
+        deactivate customerDataPersister
+        "api-platforme" -> RESTclient : HTTP => Code 201 \nHEADER => Content-Type : application/ld+json \nBODY => <new customer in json>    
+    else token is not valid
+        "api-platforme" -> RESTclient : HTTP => Code 401 \nHEADER => Content-Type : application/json \nBODY => json with messge : \n- "JWT Token not found" \n- or "Expired JWT Token"\n- or "Invalid JWT Token"
+    end
+    deactivate "api-platforme"
+    deactivate RESTclient
+@enduml
