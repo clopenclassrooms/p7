@@ -1,0 +1,14 @@
+@startuml
+    actor RESTclient
+    entity "api-platforme"
+    database BDD
+    
+    RESTclient -> "api-platforme" : HTTP => GET <host>\api\products \nHEADER => Bearer <token> \n[QUERY => page=<numPage>]
+    "api-platforme" -> "api-platforme" : Check token
+    alt token is valid 
+        "api-platforme" -> BDD : Get products
+        "api-platforme" -> RESTclient : HTTP => Code 200 \nHEADER => Content-Type : application/ld+json \nBODY => <paginated products in json> 
+    else token is not valid
+        "api-platforme" -> RESTclient : HTTP => Code 401 \nHEADER => Content-Type : application/json \nBODY => json with messge : \n- "JWT Token not found" \n- or "Expired JWT Token"\n- or "Invalid JWT Token"
+    end
+@enduml

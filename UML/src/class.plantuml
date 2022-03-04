@@ -1,0 +1,133 @@
+@startuml
+    class AppFixtures{
+        - _faker
+        - _companyRepository
+        - _passwordHasher
+        - _manager
+        - _listOfCompany
+
+        + __construct()
+        + load()
+        + createCompany()
+        + createUser()
+        + createCustomer()
+        + createProduct()
+    }
+
+    class CustomerItemDataPersister{
+        - _security
+        - _entityManager
+
+        + supports()
+        + persist()
+        + remove()
+    }
+
+    class CustomerCollectionDataProvider{
+        - _security
+
+        + __construct()
+        + supports()
+        + getCollection()
+    }
+
+    class CustomerItemDataProvider{
+        - _security
+        - _customerRepository
+
+        + __construct()
+        + supports()
+        + getItem()
+    }
+
+    class CustomerPaginator{
+        - _customers
+        - _page
+
+        + __construct()
+        + getLastPage()
+        + getTotalItems()
+        + getCurrentPage()
+        + getItemsPerPage()
+        + count()
+        + getIterator()
+    }
+
+    class Company{
+        - id
+        - name
+        - users
+        - customers
+
+        + getId()
+        + getName()
+        + setName()
+        + getUsers()
+        + addUser()
+        + removeUser()
+        + getCustomers()
+        + addCustomer()
+        + removeCustomer()
+
+    }
+
+    class Customer{
+        - id
+        - firstname
+        - lastname
+        - company
+
+        + __construct()
+        + getId()
+        + getFirstname()
+        + setFirstname()
+        + getLastname()
+        + setLastname()
+        + getCompany()
+        + setCompany()
+    }
+
+    class Product{
+        - id
+        - name
+        - brand
+        - weight
+
+        + getId()
+        + getName()
+        + setName()
+        + getBrand()
+        + setBrand()
+        + getWeight()
+        + setWeight()
+    }
+
+    class User{
+        - id
+        - username
+        - roles
+        - password
+        - company
+
+        + getId()
+        + getUsername()
+        + setUsername()
+        + getUserIdentifier()
+        + getRoles()
+        + setRoles()
+        + getPassword()
+        + setPassword()
+        + getSalt()
+        + eraseCredentials()
+        + getCompany()
+        + setCompany()
+    }
+
+    class DisplayCustomerWithoutAuthorizationException{
+
+    }
+
+    class CustomerNotExistException{
+
+    }
+@enduml
