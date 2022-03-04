@@ -18,7 +18,6 @@ Récupère un token pour l'accès aux ressources
 | - | - | - |
 |401|Unauthorized|{"code": 401,"message": "Invalid credentials."}|
 
-
 ## ***GET \<host>/api/products***
 ### Description
 Récupère la liste des produits Bilemo
@@ -34,7 +33,7 @@ Récupère la liste des produits Bilemo
 |200|OK|Collection de produits paginés en JSON|
 
 Exemple de JSON : 
-```
+```JSON
 {
 	"@context": "\/api\/contexts\/Product",
 	"@id": "\/api\/products",
@@ -66,7 +65,6 @@ Exemple de JSON :
 | 401 | Expired JWT Token |  |
 | 401 | JWT Token not found | |
 
-
 ## ***GET \<host>/api/products/{id}***
 ### Description
 Récupère les informations détaillées d'un produit Bilemo 
@@ -82,7 +80,7 @@ Récupère les informations détaillées d'un produit Bilemo
 |200|OK|Détail du produit en JSON|
 
 Exemple de JSON: 
-```
+```JSON
 {
 	"@context": "\/api\/contexts\/Product",
 	"@id": "\/api\/products\/1601",
@@ -100,7 +98,6 @@ Exemple de JSON:
 | 401 | JWT Token not found | Code d'erreur en JSON |
 | 404 | Not Found | Code d'erreur en JSON |
 
-
 ## ***GET \<host>/api/customers***
 ### Description
 Récupère la liste des clients de l'entreprise de l'utilisateur
@@ -116,7 +113,7 @@ Récupère la liste des clients de l'entreprise de l'utilisateur
 |200|OK|Collection de client paginés en JSON|
 
 Exemple de JSON : 
-```
+```JSON
 {
 	"@context": "\/api\/contexts\/Customer",
 	"@id": "\/api\/customers",
@@ -148,7 +145,6 @@ Exemple de JSON :
 | 401 | Expired JWT Token |  |
 | 401 | JWT Token not found | |
 
-
 ## ***GET \<host>/api/customers/{id}***
 ### Description
 Récupère le détail d'un client de l'entreprise de l'utisateur
@@ -164,7 +160,7 @@ Récupère le détail d'un client de l'entreprise de l'utisateur
 |200|OK|Détail du produit en JSON|
 
 Exemple de JSON: 
-```
+```JSON
 {
 	"@context": "\/api\/contexts\/Customer",
 	"@id": "\/api\/customers\/547",
@@ -196,7 +192,7 @@ Ajoute un client pour l'entreprise de l'utilisateur
 |201| Created | client créé en JSON|
 
 Exemple de réponse JSON : 
-```
+```JSON
 {
 	"@context": "\/api\/contexts\/Customer",
 	"@id": "\/api\/customers\/813",
