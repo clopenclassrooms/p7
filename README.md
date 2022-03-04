@@ -1,8 +1,8 @@
-Go to the directory <path> (where you will clone the project)
 git clone https://github.com/clopenclassrooms/p7.git
-cd p7/docker/
 
-Edit .env
-PROJECT_PATH=<path>
+cd p7
+chmod +x run.sh config.sh config_db.sh
+./run.sh
 
-docker-compose up
+when all container is launch
+./config.sh
