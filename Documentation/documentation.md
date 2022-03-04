@@ -5,7 +5,7 @@
 Récupère un token pour l'accès aux ressources
 ### Paramètres
 |Nom|Situé dans|Valeur|Requis|
-| - | - | -| -| - | - |
+| - | - | -| -|
 ||BODY|{"username":"\<username>","password":"\<password>"}| oui
 |Content-Type|HEADER|application/json| oui |
 ### Réponse
@@ -23,7 +23,7 @@ Récupère un token pour l'accès aux ressources
 Récupère la liste des produits Bilemo
 ### Paramètres
 |Nom|Situé dans|Valeur|Requis|
-| - | - | -| -| - | - |
+| - | - | -| -|
 | Authorization | HEADER | \<token> | oui |
 | page | QUERY | integer | non |
 ### Réponse
@@ -70,7 +70,7 @@ Exemple de JSON :
 Récupère les informations détaillées d'un produit Bilemo 
 ### Paramètres
 |Nom|Situé dans|Valeur|Requis|
-| - | - | -| -| - | - |
+| - | - | -| -|
 | id | QUERY | integer | oui |
 | Authorization | HEADER | \<token> | oui |
 ### Réponse
@@ -103,7 +103,7 @@ Exemple de JSON:
 Récupère la liste des clients de l'entreprise de l'utilisateur
 ### Paramètres
 |Nom|Situé dans|Valeur|Requis|
-| - | - | -| -| - | - |
+| - | - | -| -|
 | Authorization | HEADER | \<token> | oui |
 | page | QUERY | integer | non |
 ### Réponse
@@ -150,7 +150,7 @@ Exemple de JSON :
 Récupère le détail d'un client de l'entreprise de l'utisateur
 ### Paramètres
 |Nom|Situé dans|Valeur|Requis|
-| - | - | -| -| - | - |
+| - | - | -| -|
 | id | QUERY | integer | oui |
 | Authorization | HEADER | \<token> | oui |
 ### Réponse
@@ -181,7 +181,7 @@ Exemple de JSON:
 Ajoute un client pour l'entreprise de l'utilisateur
 ### Paramètres
 |Nom|Situé dans|Valeur|Requis|
-| - | - | -| -| - | - |
+| - | - | -| -|
 | Authorization | HEADER | \<token> | oui |
 | | BODY | {"firstname":"\<firstname>","lastname":"\<lastname>"}
 ### Réponse
@@ -213,7 +213,7 @@ Exemple de réponse JSON :
 Supprime un client de l'entreprise de l'utilisateur
 ### Paramètres
 |Nom|Situé dans|Valeur|Requis|
-| - | - | -| -| - | - |
+| - | - | -| -|
 | id | QUERY | integer | oui |
 | Authorization | HEADER | \<token> | oui |
 ### Réponse
