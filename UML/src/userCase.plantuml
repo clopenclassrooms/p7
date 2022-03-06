@@ -1,0 +1,18 @@
+@startuml ""
+left to right direction
+actor User as g
+
+package "API Bilemo" {
+  usecase "Get token" as UC1
+  usecase "Get list of product" as UC2
+  usecase "Get detail of one product" as UC3
+  usecase "Add a customer" as UC4
+  usecase "Delete a customer" as UC5
+}
+
+g --> UC1
+g --> UC2
+g --> UC3
+g --> UC4
+g --> UC5
+@enduml
