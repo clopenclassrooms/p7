@@ -6,10 +6,10 @@ package "API Bilemo" {
   usecase "Get token" as UC1
   usecase "Get list of product" as UC2
   usecase "Get detail of one product" as UC3
-  usecase "Get list of customer\nfor the user company" as UC4
-  usecase "Get detail of one customer\nof the user company" as UC5
-  usecase "Add a customer\nfor the user company" as UC6
-  usecase "Delete a customer\nof the user company" as UC7
+  usecase "Get list of customer for the user company" as UC4
+  usecase "Get detail of one customer of the user company" as UC5
+  usecase "Add a customer for the user company" as UC6
+  usecase "Delete a customer of the user company" as UC7
 }
 
 g --> UC1
