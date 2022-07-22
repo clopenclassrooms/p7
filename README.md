@@ -18,7 +18,7 @@ when all containers is launch (Ony for first launch)
 You can find the complete REST API documentation [here](https://github.com/clopenclassrooms/p7/blob/main/Documentation/documentation.md)
 
 ## Test REST API
-You can use this [Insomnia file](https://github.com/clopenclassrooms/p7/blob/main/Documentation/Insomnia.json) for test the REST API.
+You can use this [Postman file](https://github.com/clopenclassrooms/p7/blob/main/Documentation/Postman.json) for test the REST API.
 
 The token is automatically add from the "GET /api/login" resquest : 
 ![](https://github.com/clopenclassrooms/p7/blob/main/Documentation/img/bearer1.png)

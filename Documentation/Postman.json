@@ -1,0 +1,716 @@
+{
+	"info": {
+		"_postman_id": "4414b27d-749b-4546-a0ff-12528ed7cb5d",
+		"name": "Bilemo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/login (with free account)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//Test and save token",
+							"const jsonData = pm.response.json();",
+							"pm.test('Has token', function() {",
+							"  if(pm.expect(jsonData.token))",
+							"  {",
+							"    pm.globals.set(\"tokenFree\",jsonData.token);",
+							"  }",
+							"});",
+							"//console.log(pm.globals.get(\"tokenFree\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"free\",\"password\":\"free\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//Test Richardson level 3 and save next page url",
+							"const jsonData = pm.response.json();",
+							"pm.test('Has next page link', function() {",
+							"  if(pm.expect(jsonData[\"hydra:view\"][\"hydra:next\"]))",
+							"  {",
+							"    pm.globals.set(\"productNextPage\",jsonData[\"hydra:view\"][\"hydra:next\"]);",
+							"  }",
+							"});",
+							"",
+							"//Save first response times",
+							"pm.globals.set(\"firstResponseTimes\",pm.response.responseTime);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true,
+					"accept": true,
+					"user-agent": true,
+					"host": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenFree}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/product (test performance)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.globals.set(\"lastResponseTimes\",pm.response.responseTime); //for review",
+							"",
+							"//Performance was upgrade with the cache",
+							"pm.test(\"Performance was upgrade with the cache\", () => {",
+							"  pm.expect(pm.response.responseTime).to.be.below(pm.globals.get(\"firstResponseTimes\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"connection": true,
+					"accept": true,
+					"user-agent": true,
+					"host": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenFree}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/products (next Page)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//Test Richardson level 3",
+							"const jsonData = pm.response.json();",
+							"pm.test('Richardson level 3', function() {",
+							"  pm.expect(jsonData[\"hydra:view\"][\"@id\"]).to.eql(\"/api/products?page=2\");",
+							"});",
+							"",
+							"//Save one product Id",
+							"pm.globals.set(\"productId\",jsonData[\"hydra:member\"][0][\"id\"]);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenFree}}",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000{{productNextPage}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000{{productNextPage}}"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/products/{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//Test product",
+							"const jsonData = pm.response.json();",
+							"pm.test('Product exist', function() {",
+							"  pm.expect(jsonData[\"id\"]).to.eql(pm.globals.get(\"productId\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenFree}}",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/products/{{productId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products",
+						"{{productId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/products/0  (not exist)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 404",
+							"pm.test(\"Status code is 404\", function () {",
+							"  pm.response.to.have.status(404);",
+							"});",
+							"",
+							"//Test error message \"Product not exist\"",
+							"const jsonData = pm.response.json();",
+							"pm.test('Test error message \"Product not exist\"', function() {",
+							"  pm.expect(jsonData[\"hydra:description\"]).to.eql(\"Product not exist\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenFree}}",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/products/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/customers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//Test Richardson level 3 and save next page url",
+							"const jsonData = pm.response.json();",
+							"pm.test('Has next page link', function() {",
+							"  if(pm.expect(jsonData[\"hydra:view\"][\"hydra:next\"]))",
+							"  {",
+							"    pm.globals.set(\"clientFreeNextPage\",jsonData[\"hydra:view\"][\"hydra:next\"]);",
+							"  }",
+							"});",
+							"",
+							"//Save first client id",
+							"pm.globals.set(\"firstFreeClientId\",jsonData[\"hydra:member\"][0][\"id\"]);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenFree}}",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/login (with sfr account)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//Test if \"token\" exist",
+							"",
+							"",
+							"//Test and save token",
+							"const jsonData = pm.response.json();",
+							"pm.test('Has token', function() {",
+							"  if(pm.expect(jsonData.token))",
+							"  {",
+							"    pm.globals.set(\"tokenSFR\",jsonData.token);",
+							"  }",
+							"});",
+							"//console.log(pm.globals.get(\"tokenFree\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"SFR\",\"password\":\"SFR\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/customers (SFR)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//Test Richardson level 3 and save next page url",
+							"const jsonData = pm.response.json();",
+							"pm.test('Has next page link', function() {",
+							"  if(pm.expect(jsonData[\"hydra:view\"][\"hydra:next\"]))",
+							"  {",
+							"    pm.globals.set(\"clientSFRNextPage\",jsonData[\"hydra:view\"][\"hydra:next\"]);",
+							"  }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenSFR}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/customers/{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 204",
+							"pm.test(\"Status code is 204\", function () {",
+							"  pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenFree}}",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/customers/{{firstFreeClientId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"customers",
+						"{{firstFreeClientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/customers/{id} (not exist)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 404",
+							"pm.test(\"Status code is 404\", function () {",
+							"  pm.response.to.have.status(404);",
+							"});",
+							"",
+							"//Test error message \"Customer not exist\"",
+							"const jsonData = pm.response.json();",
+							"pm.test('Test error message \"Customer not found\"', function() {",
+							"  pm.expect(jsonData[\"hydra:description\"]).to.eql(\"Customer not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenFree}}",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/customers/{{firstFreeClientId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"customers",
+						"{{firstFreeClientId}}"
+					],
+					"query": [
+						{
+							"key": "auth",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/customers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 201",
+							"pm.test(\"Status code is 201\", function () {",
+							"  pm.response.to.have.status(201);",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"",
+							"//Test Firstname",
+							"pm.test('Firstname is Roget', function() {",
+							"  pm.expect(jsonData[\"firstname\"]).to.eql(\"Roget\");",
+							"});",
+							"",
+							"//Test Lastname",
+							"pm.test('Lastname is Hamon', function() {",
+							"  pm.expect(jsonData[\"lastname\"]).to.eql(\"Hamon\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenFree}}",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"firstname\":\"Roget\",\"lastname\":\"Hamon\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

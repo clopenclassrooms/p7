@@ -262,6 +262,15 @@
             'reference' => 'b08d174fc979e12f609ad075e49b46a9e30ecfac',
             'dev_requirement' => false,
         ),
+        'monolog/monolog' => array(
+            'pretty_version' => '2.7.0',
+            'version' => '2.7.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../monolog/monolog',
+            'aliases' => array(),
+            'reference' => '5579edf28aee1190a798bfa5be8bc16c563bd524',
+            'dev_requirement' => true,
+        ),
         'namshi/jose' => array(
             'pretty_version' => '7.2.3',
             'version' => '7.2.3.0',
@@ -421,7 +430,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache-implementation' => array(
@@ -480,6 +490,15 @@
             'aliases' => array(),
             'reference' => 'a2a86ec353d825c75856c6fd14fac416a7bdb6b8',
             'dev_requirement' => false,
+        ),
+        'symfony/debug-bundle' => array(
+            'pretty_version' => 'v5.4.3',
+            'version' => '5.4.3.0',
+            'type' => 'symfony-bundle',
+            'install_path' => __DIR__ . '/../symfony/debug-bundle',
+            'aliases' => array(),
+            'reference' => '6f508169752ed2c0d0d8a6641c4cca39a8f1dfcb',
+            'dev_requirement' => true,
         ),
         'symfony/dependency-injection' => array(
             'pretty_version' => 'v5.4.3',
@@ -644,6 +663,24 @@
             'install_path' => __DIR__ . '/../symfony/maker-bundle',
             'aliases' => array(),
             'reference' => '411863a63c495c68852215518bb5665965c61a2d',
+            'dev_requirement' => true,
+        ),
+        'symfony/monolog-bridge' => array(
+            'pretty_version' => 'v5.4.10',
+            'version' => '5.4.10.0',
+            'type' => 'symfony-bridge',
+            'install_path' => __DIR__ . '/../symfony/monolog-bridge',
+            'aliases' => array(),
+            'reference' => 'b3b0890e76e7eb626f27b165a5c501f2754dfbbd',
+            'dev_requirement' => true,
+        ),
+        'symfony/monolog-bundle' => array(
+            'pretty_version' => 'v3.8.0',
+            'version' => '3.8.0.0',
+            'type' => 'symfony-bundle',
+            'install_path' => __DIR__ . '/../symfony/monolog-bundle',
+            'aliases' => array(),
+            'reference' => 'a41bbcdc1105603b6d73a7d9a43a3788f8e0fb7d',
             'dev_requirement' => true,
         ),
         'symfony/password-hasher' => array(
@@ -930,6 +967,15 @@
             'aliases' => array(),
             'reference' => '8b9b073390359549fec5f5d797f23bbe9e2997a5',
             'dev_requirement' => false,
+        ),
+        'symfony/web-profiler-bundle' => array(
+            'pretty_version' => 'v5.4.10',
+            'version' => '5.4.10.0',
+            'type' => 'symfony-bundle',
+            'install_path' => __DIR__ . '/../symfony/web-profiler-bundle',
+            'aliases' => array(),
+            'reference' => 'f61c99d8dbd864b11935851b598f784bcff36fc7',
+            'dev_requirement' => true,
         ),
         'symfony/yaml' => array(
             'pretty_version' => 'v5.4.3',

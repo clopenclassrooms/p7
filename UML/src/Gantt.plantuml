@@ -1,0 +1,60 @@
+[Create UML diagram] lasts 2 days
+[Create docker envrionnement] lasts 1 days
+[Create entity] lasts 1 days
+[Create Database] lasts 1 days
+[Create fixtures] lasts 1 days
+[Create "Get product list"] lasts 1 days
+[Create "Get product"] lasts 1 days
+[Create "Get Customer list"] lasts 1 days
+[Create "Get Customer"] lasts 1 days
+[Create "Add Customer"] lasts 1 days
+[Create "Delete Customer"] lasts 1 days
+[Configure cache system] lasts 1 days
+[Create README.md] lasts 1 days
+[Create Documentation] lasts 1 days
+[Get Codacy grade A badge] lasts 1 days
+
+
+'Contrainte d'enchainement de tâches.
+[Create entity] starts at [Create docker envrionnement]'s end
+[Create Database] starts at [Create entity]'s end
+[Create fixtures] starts at [Create Database]'s end
+[Create "Get product list"] starts at [Create fixtures]'s end
+[Create "Get product"] starts at [Create fixtures]'s end
+[Create "Get Customer list"] starts at [Create fixtures]'s end
+[Create "Get Customer"] starts at [Create fixtures]'s end
+[Create "Add Customer"] starts at [Create Database]'s end
+[Create "Delete Customer"] starts at [Create fixtures]'s end
+[Configure cache system] starts at [Create docker envrionnement]'s end
+[Get Codacy grade A badge] starts at [Create Documentation]'s end
+
+'Contrainte de ressource humaine.
+[Create docker envrionnement] starts at [Create UML diagram]'s end with blue link
+[Create entity] starts at [Create docker envrionnement]'s end with blue link
+[Create Database] starts at [Create entity]'s end with blue link
+[Create fixtures] starts at [Create Database]'s end with blue link
+[Create "Get product list"] starts at [Create fixtures]'s end with blue link
+[Create "Get product"] starts at [Create "Get product list"]'s end with blue link
+[Create "Get Customer list"] starts at [Create "Get product"]'s end with blue link
+[Create "Get Customer"] starts at [Create "Get Customer list"]'s end with blue link
+[Create "Add Customer"] starts at [Create "Get Customer"]'s end with blue link
+[Create "Delete Customer"] starts at [Create "Add Customer"]'s end with blue link
+[Configure cache system] starts at [Create "Delete Customer"]'s end with blue link
+[Create README.md] starts at [Configure cache system]'s end with blue link
+[Create Documentation] starts at [Create README.md]'s end with blue link
+[Get Codacy grade A badge] starts at [Create Documentation]'s end with blue link
+
+
+-- Légende -- 
+[Contrainte d'enchainement de tâches] lasts 0 days 
+[Contrainte d'enchainement de tâches] is colored in White
+[Tâche1] lasts 2 days
+[Tâche2] lasts 2 days
+[Tâche2] starts at [Tâche1]'s end
+
+[Contrainte de ressource humaine] lasts 0 days 
+[Contrainte de ressource humaine] is colored in White
+[TâcheX] lasts 2 days
+[TâcheY] lasts 2 days
+[TâcheY] starts at [TâcheX]'s end with blue link
+@endgantt

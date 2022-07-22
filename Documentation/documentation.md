@@ -96,7 +96,7 @@ Exemple de JSON:
 | - | - | - |
 | 401 | Expired JWT Token | Code d'erreur en JSON |
 | 401 | JWT Token not found | Code d'erreur en JSON |
-| 404 | Not Found | Code d'erreur en JSON |
+| 404 | Product not exist | Code d'erreur en JSON |
 
 ## ***GET \<host>/api/customers***
 ### Description
