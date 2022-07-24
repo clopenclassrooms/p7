@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4414b27d-749b-4546-a0ff-12528ed7cb5d",
+		"_postman_id": "f41b1b5b-5748-4b13-81e6-d2e098ee77d8",
 		"name": "Bilemo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -597,6 +597,52 @@
 							"//Test code 404",
 							"pm.test(\"Status code is 404\", function () {",
 							"  pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenFree}}",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/customers/9999999999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"customers",
+						"9999999999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/customers/{id} (not exist)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 404",
+							"pm.test(\"Status code is 404\", function () {",
+							"  pm.response.to.have.status(404);",
 							"});",
 							"",
 							"//Test error message \"Customer not exist\"",
@@ -691,6 +737,66 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\"firstname\":\"Roget\",\"lastname\":\"Hamon\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/customers (Bad request)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test code 201",
+							"pm.test(\"Status code is 400\", function () {",
+							"  pm.response.to.have.status(400);",
+							"});",
+							"",
+							"//Test error message",
+							"const jsonData = pm.response.json();",
+							"pm.test('Error in firstname or lastname value\"', function() {",
+							"  pm.expect(jsonData[\"hydra:description\"]).to.eql(\"Error in firstname or lastname value\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenFree}}",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"firstname\":\"Roget'; DROP DATABASE\",\"lastname\":\"Hamon\"}",
 					"options": {
 						"raw": {
 							"language": "json"

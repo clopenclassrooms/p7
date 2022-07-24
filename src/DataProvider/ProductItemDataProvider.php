@@ -33,6 +33,10 @@ final class ProductItemDataProvider implements ItemDataProviderInterface, Restri
     
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
+        if($context["item_operation_name"] != "get")
+        {
+            return false;
+        }
         return Product::class === $resourceClass;
     }
 

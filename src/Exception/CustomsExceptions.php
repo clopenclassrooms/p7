@@ -13,3 +13,7 @@ final class CustomerNotExistException extends \Exception
 final class ProductNotExistException extends \RuntimeException
 {
 }
+
+final class CustomerBadRequest extends \Exception
+{
+}

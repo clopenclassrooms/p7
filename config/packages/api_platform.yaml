@@ -42,6 +42,7 @@ api_platform:
         App\Exception\DisplayCustomerWithoutAuthorizationException: 401
         App\Exception\CustomerNotExistException: 404
         App\Exception\ProductNotExistException: 404
+        App\Exception\CustomerBadRequest: 400
 
     error_formats:
         jsonproblem:
